@@ -10,19 +10,21 @@ def set_comport(port: str):
             while True:
                 data = [str(x) for x in ser.readline().decode().strip().split(",")]
                 try:
-                    thrust = 0.82 - float(data[0])
-                    # throttle = int(float(data[1]))
+                    # thrust = 0.82 - float(data[0])
+                    thrust = 0
+                    throttle = int(float(data[1]))
                 except ValueError:
                     print(data)
                     continue
                 except IndexError:
                     print(data)
                     continue
-                thrust = 0.82 - float(data[0])
-                # throttle = int(float(data[1]))
-                print(f"{time.strftime('%H:%M:%S')},{thrust:.5f}")#,{throttle}")
+                # thrust = 0.82 - float(data[0])
+                thrust = 0
+                throttle = int(float(data[1]))
+                print(f"{time.strftime('%H:%M:%S')},{thrust:.5f},{throttle}")
                 # print(f"{time.strftime('%H:%M:%S')},{thrust:.5f},{throttle}", file=file)
-                print(f"{time.strftime('%H:%M:%S')},{thrust:.5f}", file=file)
+                # print(f"{time.strftime('%H:%M:%S')},{thrust:.5f}", file=file)
     except serial.serialutil.SerialException:
         print("Arduino disconnected.")
         sys.exit(0)

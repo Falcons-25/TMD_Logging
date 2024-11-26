@@ -30,7 +30,7 @@ void loop() {
     // HX711 config
     scale.set_scale();
     Serial.println("Tare... remove any weights from the scale (5sec).");
-    delay(5000);
+    // delay(5000);
     scale.tare();
     Serial.println("Tare done.");
     
@@ -42,14 +42,16 @@ void loop() {
 
     while (scale.is_ready()) {
       // Serial.print("Weight: ");
-      Serial.println(known_weight * (1 - scale.get_units(10) / known_weight) / 1000, 5);
+      // Serial.println(known_weight * (1 - scale.get_units(10) / known_weight) / 1000, 5);
       
       // RC Receiver code
       if (bNewThrottleSignal) {
-        actualThrottle = map(nThrottleIn, 905, 2090, 0, 100);
-        // Serial.print("Throttle: ");
+        actualThrottle = map(nThrottleIn, 1004, 1984, 0, 100);
+        Serial.print("Throttle: ");
+        // Serial.print(",");
+        Serial.print(actualThrottle);
         Serial.print(",");
-        Serial.println(actualThrottle);
+        Serial.println(nThrottleIn);
         bNewThrottleSignal = false;
       }
       else {
